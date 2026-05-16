@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build: .
-    image: cristiano98756/backend:latest
+    image: christian98756/backend:latest
     ports:
       - "3000:3000"
     environment:
