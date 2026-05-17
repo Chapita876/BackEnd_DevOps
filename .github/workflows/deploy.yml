@@ -36,7 +36,14 @@ jobs:
           proxy_username: ec2-user
           proxy_key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+            cd /home/ec2-user
+            if [ ! -d "BackEnd_DevOps" ]; then
+              git clone https://github.com/Chapita876/BackEnd_DevOps.git
+            else
+              cd BackEnd_DevOps && git pull origin deploy && cd ..
+            fi
+            cd BackEnd_DevOps
+            docker build -t backend:latest .
             docker stop backend || true
             docker rm backend || true
-            docker compose up -d
+            docker run -d --name backend -p 3000:3000 backend:latest
