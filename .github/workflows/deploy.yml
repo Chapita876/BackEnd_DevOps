@@ -36,7 +36,7 @@ jobs:
           proxy_username: ec2-user
           proxy_key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
-            sudo docker stop backend || true
-            sudo docker rm backend || true
-            sudo docker-compose up -d
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+            docker stop backend || true
+            docker rm backend || true
+            docker compose up -d
